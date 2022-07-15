@@ -23,15 +23,19 @@ jobs:
       dockerdir: '.'
     steps:
     - uses: actions/checkout@v3
-    - name: Pre-Deploy
-      if: ${{ matrix.variant != 'base' }}
-      env:
-        version: ${{ matrix.variant }}
-        dockerdir: variants/${{ matrix.variant }}
-      run: echo "Switch to ${{ matrix.variant }}"
     - name: Login to Hub
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: Build the Docker image
+
+    - name: Build Base Image
+      if: ${{ matrix.variant == 'base' }}
       run: docker build ${{ env.dockerdir }} --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ env.version }}
-    - name: Push Image
+    - name: Push Base Image
+      if: ${{ matrix.variant == 'base' }}
       run: docker push $DOCKER_USER/$REPO_NAME:${{ env.version }}
+
+    - name: Build Alternative Image
+      if: ${{ matrix.variant != 'base' }}
+      run: docker build variants/${{ matrix.variant }} --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}
+    - name: Push Alternative Image
+      if: ${{ matrix.variant != 'base' }}
+      run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}
