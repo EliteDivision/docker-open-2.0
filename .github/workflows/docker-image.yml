@@ -23,11 +23,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Pre-Deploy
-      if: ${{ matrix.version != 'base' }}
+      if: ${{ matrix.variant != 'base' }}
       env:
-        version: ${{ matrix.version }}
-        dockerdir: variants/${{ matrix.version }}
-      run: echo "Switch to ${{ matrix.version }}"
+        version: ${{ matrix.variant }}
+        dockerdir: variants/${{ matrix.variant }}
+      run: echo "Switch to ${{ matrix.variant }}"
     - name: Login to Hub
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
