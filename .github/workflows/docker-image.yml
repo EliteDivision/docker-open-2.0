@@ -17,6 +17,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       matrix:
         variant: ['base', 'with-shibboleth']
     steps:
