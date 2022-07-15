@@ -105,7 +105,7 @@ COPY docker/php/php.pool /etc/php/${PHP_VERSION}/fpm/pool.d/zz_custom.conf
 COPY docker/supervisor/ /etc/supervisor/conf.d/
 
 # Post Processes
-RUN chmod +x /amos-service.sh && \
+RUN chmod +x /entrypoint.sh && \
     mkdir -p /run/php
 
 # Optional ENV Vars
