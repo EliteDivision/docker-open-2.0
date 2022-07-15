@@ -35,7 +35,7 @@ jobs:
 
     - name: Build Alternative Image
       if: ${{ matrix.variant != 'base' }}
-      run: docker build variants/${{ matrix.variant }} --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}
+      run: docker build variants/${{ matrix.variant }} --file variants/${{ matrix.variant }}/Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}
     - name: Push Alternative Image
       if: ${{ matrix.variant != 'base' }}
       run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}
