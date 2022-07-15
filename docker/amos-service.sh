@@ -28,10 +28,6 @@ else
         rm /etc/supervisor/conf.d/cron.conf
     fi
 
-    if [ "$ENABLE_SHIBD" = "false" ] ; then
-        rm /etc/supervisor/conf.d/shibd.conf
-    fi
-
     if [ "$ENABLE_APACHE" = "false" ] ; then
         rm /etc/supervisor/conf.d/apache.conf
     else
@@ -72,8 +68,6 @@ fi
 
 # Force  stop services
 echo "Force-stop Services"
-service shibd restart
-service shibd stop
 systemctl disable apache2.service
 service apache2 stop
 

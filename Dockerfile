@@ -28,7 +28,6 @@ RUN apt-get update \
     fontconfig \
     #git \
     libapache2-mod-php${PHP_VERSION} \
-    libapache2-mod-shib \
     libfontenc1 \
     libxrender1 \
     logrotate \
@@ -71,7 +70,6 @@ RUN a2enmod \
     proxy_http \
     rewrite \
     session \
-    shib  \
     vhost_alias \
     && update-alternatives --set php /usr/bin/php${PHP_VERSION}
 
@@ -114,7 +112,6 @@ RUN chmod +x /amos-service.sh && \
 
 # Optional ENV Vars
 ENV ENABLE_CRON="true"
-ENV ENABLE_SHIBD="true"
 ENV ENABLE_APACHE="true"
 ENV ENABLE_PHP="true"
 
