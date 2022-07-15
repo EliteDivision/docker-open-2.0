@@ -11,7 +11,7 @@ RUN apt-get update \
 RUN a2enmod \
     shib
 
-COPY docker/service/ /service/
+COPY service/ /service/
 COPY supervisor/ /etc/supervisor/conf.d/
 
 # Optional ENV Vars

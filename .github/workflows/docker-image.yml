@@ -16,7 +16,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        variant: ['base', 'with-shibboleth']
+        variant: ['with-shibboleth']
     env:
       version: 'latest'
       dockerfile: 'Dockerfile'
