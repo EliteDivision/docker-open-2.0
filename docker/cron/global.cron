@@ -1,0 +1,2 @@
+#m      h       dom	    mon	    dow	    user        command
+0       0       *       *       *       root        flock --verbose -w 0 /var/www/app/common/uploads/logrotate.lock logrotate -f /etc/logrotate.conf > /var/www/app/common/uploads/logrotate.log

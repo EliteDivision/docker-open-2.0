@@ -1,0 +1,13 @@
+/var/www/app/common/uploads/*.log {
+	daily
+	missingok
+	rotate 14
+	compress
+	delaycompress
+	notifempty
+	create 640 root adm
+	sharedscripts
+	postrotate
+                supervisorctl restart program:apache > /dev/null 2>&1;
+	endscript
+}
