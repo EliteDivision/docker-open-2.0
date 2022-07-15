@@ -26,6 +26,7 @@ jobs:
       env:
         version: ${{ matrix.version }}
         dockerdir: variants/${{ matrix.version }}
+      run: echo "Switch to ${{ matrix.version }}"
     - name: Login to Hub
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
