@@ -89,10 +89,8 @@ COPY --chown=www-data:www-data app /var/www/app
 COPY environments /var/www/environment/environments
 
 # Copy Services Files
-COPY docker/amos-service.sh /
-COPY docker/amos-service-phase-one.sh /
-COPY docker/amos-service-one-time.sh /
-COPY docker/amos-service-phase-two.sh /
+COPY docker/entrypoint.sh /
+COPY docker/service/ /service/
 
 COPY docker/cron/ /etc/cron.d/
 
@@ -119,4 +117,4 @@ ENV ENABLE_PHP="true"
 EXPOSE 443
 
 # Set entrypoint and default command.
-CMD "/amos-service.sh"
+CMD "/entrypoint.sh"
