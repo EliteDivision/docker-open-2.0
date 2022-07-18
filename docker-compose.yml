@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    image: elitedivision/open-2.0
+    ports:
+      - "8443:443"
+    volumes:
+      - ./app:/var/www/app
+      - applog:/var/log
+    links:
+      - database
+      - elasticsearch
+      - antivirus
+  database:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+    volumes:
+      - dbdata:/var/lib/mysql
+      - applog:/var/log
+  elasticsearch:
+    image: elasticsearch:6.8.23
+    restart: always
+    volumes:
+      - applog:/var/log
+  antivirus:
+    image: clamav/clamav
+    restart: always
+    volumes:
+      - ./app:/var/www/app
+      - applog:/var/log
+volumes:
+  applog: {}
+  dbdata: {}
