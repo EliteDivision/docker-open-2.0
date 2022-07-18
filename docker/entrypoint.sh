@@ -7,7 +7,7 @@ set -e
 cd /var/www/app/
 
 # Impor custom phases
-for f in /service/; do source $f; done
+for f in /service/*.sh; do source $f; done
 
 # Supervisor is the service manager
 exec supervisord -n

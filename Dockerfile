@@ -85,9 +85,6 @@ RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-x86_64
 # Application base source code
 COPY --chown=www-data:www-data app /var/www/app
 
-# Copy env settings for the app
-COPY environments /var/www/environment/environments
-
 # Copy Services Files
 COPY docker/entrypoint.sh /
 COPY docker/service/ /service/
