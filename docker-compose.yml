@@ -4,14 +4,15 @@ services:
     build: .
     image: elitedivision/open-2.0
     ports:
-      - "8443:443"
+      - "127.0.0.1:8443:443"
     volumes:
       - ./app:/var/www/app
-      - applog:/var/log
     links:
       - database
       - elasticsearch
       - antivirus
+    networks:
+      open2net:
   database:
     image: mariadb
     restart: always
@@ -20,17 +21,32 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
       - applog:/var/log
+    expose:
+      - "3306"
+    networks:
+      open2net:
   elasticsearch:
     image: elasticsearch:6.8.23
     restart: always
     volumes:
       - applog:/var/log
+    expose:
+      - "9200"
+      - "9300"
+    networks:
+      open2net:
   antivirus:
     image: clamav/clamav
     restart: always
     volumes:
       - ./app:/var/www/app
       - applog:/var/log
+    expose:
+      - "3310"
+    networks:
+      open2net:
 volumes:
   applog: {}
   dbdata: {}
+networks:
+  open2net:
