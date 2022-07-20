@@ -1,8 +1,5 @@
 # IntelliJ project files
 .idea
-*.iml
-out
-gen
 
 # Comon Files and Dirs
 .github
@@ -13,3 +10,4 @@ docker-compose.yml
 
 # Other exclusions
 variants
+.env.sample

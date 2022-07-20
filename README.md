@@ -38,6 +38,8 @@ docker run -d --name my-ready-app -v /path/to/yout/open2app:/var/www/app elitedi
 Another easy way to run your application with all optional software is by using Docker Compose, this allows you to setup your environment with Zero external dependencies
 Just run the following command and youre ready to go
 
+> Before you setup you cluster configure your .env file using the .env.sample
+
 ```console
 docker-compose up -d
 ```
