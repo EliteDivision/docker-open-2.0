@@ -13,6 +13,7 @@ RUN a2enmod \
 
 COPY service/ /service/
 COPY supervisor/ /etc/supervisor/conf.d/
+COPY apache/ /etc/apache2/
 
 # Optional ENV Vars
 ENV ENABLE_SHIBD="true"
