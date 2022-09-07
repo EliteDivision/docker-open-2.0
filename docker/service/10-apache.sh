@@ -6,8 +6,10 @@ else
     sed -i "s/BACKEND/${DOMAIN_BACKEND}/" /etc/apache2/sites-available/000-default.conf
 
     # Generate Self-Signed Certificate
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/ssl/private/httpd.key \
+    openssl genrsa -des3 -out /etc/ssl/private/httpd.key 2048
+
+    openssl req -x509 -new -nodes -sha256 -days 365 \
+    -key /etc/ssl/private/httpd.key \
     -subj "/C=IT/ST=Italy/L=Generic/O=Private/OU=Systems/CN=com.private/emailAddress=security@company.it" \
     -out /etc/ssl/private/httpd.crt
 
