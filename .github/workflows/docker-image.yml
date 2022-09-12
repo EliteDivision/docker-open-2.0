@@ -31,8 +31,8 @@ jobs:
     - name: Build ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
       run: |
         docker build ${{ matrix.dockerdir }} \
-        --file ${{ matrix.dockerdir }}${{ env.dockerfile }} \
-        --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }} \
-        --build-arg PHP_VERSION=${{ matrix.php }}
+          --build-arg PHP_VERSION=${{ matrix.php }}
+          --file ${{ matrix.dockerdir }}${{ env.dockerfile }} \
+          --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }} \
     - name: Push ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
       run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}
