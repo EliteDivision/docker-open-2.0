@@ -11,11 +11,8 @@ ENV DOMAIN_BACKEND="backend"
 ARG PHP_VERSION="7.0"
 ENV PHP_VERSION=$PHP_VERSION
 
-# ENV Vars for the OS
-RUN bash /etc/os-release
-
 # Install software requirements
-RUN apt-get update \
+RUN bash /etc/os-release && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
     apt-transport-https \
     ca-certificates \
