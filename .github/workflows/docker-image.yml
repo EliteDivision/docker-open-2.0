@@ -18,9 +18,9 @@ jobs:
       matrix:
         php: ['7.0','8.1']
         variant: ['latest','with-shibboleth']
-      include:
-        - variant: 'with-shibboleth'
-          dockerdir: 'variants/with-shibboleth/'
+        include:
+          - variant: 'with-shibboleth'
+            dockerdir: 'variants/with-shibboleth/'
     env:
       dockerfile: 'Dockerfile'
     steps:
@@ -29,6 +29,10 @@ jobs:
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Build ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
-      run: docker build ${{ matrix.dockerdir }} --file ${{ matrix.dockerdir }}${{ env.dockerfile }} --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}
+      run: |
+        docker build ${{ matrix.dockerdir }} \
+        --file ${{ matrix.dockerdir }}${{ env.dockerfile }} \
+        --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }} \
+        --build-arg PHP_VERSION=${{ matrix.php }}
     - name: Push ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
       run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}
