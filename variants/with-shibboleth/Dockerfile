@@ -1,5 +1,4 @@
 ARG PHP_VERSION='7.0'
-
 FROM elitedivision/open-2.0:latest-${PHP_VERSION}
 
 # Install software requirements
