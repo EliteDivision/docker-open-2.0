@@ -30,7 +30,7 @@ jobs:
 
     - name: Build ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
       run: >
-        docker build ${{ matrix.dockerdir }} 
+        docker build ./${{ matrix.dockerdir }} 
         --build-arg PHP_VERSION=${{ matrix.php }} 
         --file ${{ matrix.dockerdir }}${{ env.dockerfile }} 
         --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}
