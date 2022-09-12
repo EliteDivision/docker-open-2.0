@@ -17,10 +17,12 @@ jobs:
       max-parallel: 1
       matrix:
         php: ['7.0','8.1']
-        variant: ['latest','with-shibboleth']
+        variant: ['latest','with-shibboleth', 'dev']
         include:
           - variant: 'with-shibboleth'
             dockerdir: 'variants/with-shibboleth/'
+          - variant: 'dev'
+            dockerdir: 'variants/dev/'
     env:
       dockerfile: 'Dockerfile'
     steps:

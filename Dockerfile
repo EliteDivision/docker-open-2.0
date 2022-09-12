@@ -11,19 +11,21 @@ ENV DOMAIN_BACKEND="backend"
 ARG PHP_VERSION="7.0"
 ENV PHP_VERSION=$PHP_VERSION
 
+# ENV Vars for the OS
+RUN bash /etc/os-release
+
 # Install software requirements
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
     apt-transport-https \
     ca-certificates \
-    curl \
+    #curl \
     gnupg2 \
-    lsb-release \
     wget \
     && apt-get clean \
     && apt-get autoclean \
     && wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.gpg" \
-    && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list \
+    && echo "deb https://packages.sury.org/php/ ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/php.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
     apache2 \
@@ -51,7 +53,7 @@ RUN apt-get update \
     php${PHP_VERSION}-zip \
     php${PHP_VERSION}-curl \
     php${PHP_VERSION}-intl \
-    procps \
+    #procps \
     supervisor \
     unzip \
     xfonts-75dpi \
