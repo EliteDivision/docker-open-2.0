@@ -16,26 +16,19 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        variant: ['base','with-shibboleth']
+        php: ['7.0','8.1']
+        variant: ['latest','with-shibboleth']
+      include:
+        - variant: 'with-shibboleth'
+          dockerdir: 'variants/with-shibboleth/'
     env:
-      version: 'latest'
       dockerfile: 'Dockerfile'
-      dockerdir: '.'
     steps:
     - uses: actions/checkout@v3
     - name: Login to Hub
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-    - name: Build Base Image
-      if: ${{ matrix.variant == 'base' }}
-      run: docker build ${{ env.dockerdir }} --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ env.version }}
-    - name: Push Base Image
-      if: ${{ matrix.variant == 'base' }}
-      run: docker push $DOCKER_USER/$REPO_NAME:${{ env.version }}
-
-    - name: Build Alternative Image
-      if: ${{ matrix.variant != 'base' }}
-      run: docker build variants/${{ matrix.variant }} --file variants/${{ matrix.variant }}/Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}
-    - name: Push Alternative Image
-      if: ${{ matrix.variant != 'base' }}
-      run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}
+    - name: Build ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
+      run: docker build ${{ matrix.dockerdir }} --file ${{ matrix.dockerdir }}${{ env.dockerfile }} --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}
+    - name: Push ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
+      run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}

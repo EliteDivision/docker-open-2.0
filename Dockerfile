@@ -38,7 +38,7 @@ RUN apt-get update \
     php${PHP_VERSION}-fpm \
     php${PHP_VERSION}-mcrypt \
     php${PHP_VERSION}-bcmath \
-    #php${PHP_VERSION}-soap \
+    php${PHP_VERSION}-soap \
     php${PHP_VERSION}-mysql \
     php${PHP_VERSION}-mbstring \
     php${PHP_VERSION}-apcu \
