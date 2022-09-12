@@ -1,4 +1,4 @@
-FROM elitedivision/open-2.0:latest
+FROM elitedivision/open-2.0:latest-$PHP_VERSION
 
 # Install software requirements
 RUN apt-get update \
