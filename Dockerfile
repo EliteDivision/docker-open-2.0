@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 # Timezone
 ENV TZ Europe/Rome
@@ -10,9 +10,10 @@ ENV DOMAIN_BACKEND="backend"
 #PHP VERSIONING
 ARG PHP_VERSION="7.0"
 ENV PHP_VERSION=$PHP_VERSION
+ENV VERSION_CODENAME="bullseye"
 
 # Install software requirements
-RUN bash /etc/os-release && apt-get update \
+RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
     apt-transport-https \
     ca-certificates \
@@ -80,7 +81,7 @@ RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-x86_64
     unzip awscliv2.zip && \
     ./aws/install && \
     rm -R awscliv2.zip ./aws && \
-    wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb" && \
+    wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb" && \
     dpkg -i wkhtmltopdf.deb && \
     rm wkhtmltopdf.deb
 
