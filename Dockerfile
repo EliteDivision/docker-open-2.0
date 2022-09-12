@@ -1,3 +1,5 @@
+ARG php_version='7.0'
+
 FROM debian:buster-slim
 
 # Timezone
@@ -8,7 +10,6 @@ ENV DOMAIN_FRONTEND="frontend"
 ENV DOMAIN_BACKEND="backend"
 
 # PHP Versioning
-ARG php_version='7.0'
 ENV PHP_VERSION=$php_version
 
 # Install software requirements

@@ -1,3 +1,5 @@
+ARG php_version='7.0'
+
 FROM elitedivision/open-2.0:latest-$php_version
 
 # Install software requirements
@@ -19,5 +21,4 @@ COPY apache/ /etc/apache2/
 ENV ENABLE_SHIBD="true"
 
 # PHP Versioning
-ARG php_version='7.0'
 ENV PHP_VERSION=$php_version
