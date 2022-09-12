@@ -17,3 +17,7 @@ COPY apache/ /etc/apache2/
 
 # Optional ENV Vars
 ENV ENABLE_SHIBD="true"
+
+# PHP Versioning
+ARG php_version='7.0'
+ENV PHP_VERSION=$php_version

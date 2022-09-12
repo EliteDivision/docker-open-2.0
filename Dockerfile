@@ -7,6 +7,10 @@ ENV TZ Europe/Rome
 ENV DOMAIN_FRONTEND="frontend"
 ENV DOMAIN_BACKEND="backend"
 
+# PHP Versioning
+ARG php_version='7.0'
+ENV PHP_VERSION=$php_version
+
 # Install software requirements
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
