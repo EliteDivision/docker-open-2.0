@@ -1,6 +1,6 @@
-ARG php_version='7.0'
+ARG PHP_VERSION='7.0'
 
-FROM elitedivision/open-2.0:latest-$php_version
+FROM elitedivision/open-2.0:latest-${PHP_VERSION}
 
 # Install software requirements
 RUN apt-get update \
@@ -19,6 +19,3 @@ COPY apache/ /etc/apache2/
 
 # Optional ENV Vars
 ENV ENABLE_SHIBD="true"
-
-# PHP Versioning
-ENV PHP_VERSION=$php_version

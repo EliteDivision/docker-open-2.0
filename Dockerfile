@@ -1,4 +1,4 @@
-ARG php_version='7.0'
+ARG PHP_VERSION='7.0'
 
 FROM debian:buster-slim
 
@@ -8,9 +8,6 @@ ENV TZ Europe/Rome
 # ENV Vars, must be all set by user on start
 ENV DOMAIN_FRONTEND="frontend"
 ENV DOMAIN_BACKEND="backend"
-
-# PHP Versioning
-ENV PHP_VERSION=$php_version
 
 # Install software requirements
 RUN apt-get update \
