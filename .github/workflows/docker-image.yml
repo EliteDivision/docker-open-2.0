@@ -8,7 +8,7 @@ env:
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "multiarch" ]
 
 jobs:
   deploy:
@@ -17,12 +17,17 @@ jobs:
       max-parallel: 1
       matrix:
         php: ['7.0','8.1']
+        arch: ['aarch64','x86_64']
         variant: ['latest','with-shibboleth', 'dev']
         include:
           - variant: 'with-shibboleth'
             dockerdir: 'variants/with-shibboleth/'
           - variant: 'dev'
             dockerdir: 'variants/dev/'
+          - arch: 'aarch64'
+            wkarch: 'arm64'
+          - arch: 'x86_64'
+            wkarch: 'amd64'
     env:
       dockerfile: 'Dockerfile'
     steps:
@@ -33,7 +38,9 @@ jobs:
     - name: Build ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
       run: >
         docker build ./${{ matrix.dockerdir }} 
-        --build-arg "PHP_VERSION=${{ matrix.php }}" 
+        --build-arg "PHP_VERSION=${{ matrix.php }}"
+        --build-arg "AWS_ARCH=${{ matrix.php }}" 
+        --build-arg "WK_ARCH=${{ matrix.wkarch }}" 
         --file ${{ matrix.dockerdir }}${{ env.dockerfile }} 
         --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}
     - name: Push ${{ matrix.variant }} with PHP ${{ matrix.php }} Image

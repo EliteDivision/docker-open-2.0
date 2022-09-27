@@ -12,6 +12,15 @@ ARG PHP_VERSION="7.0"
 ENV PHP_VERSION=$PHP_VERSION
 ENV VERSION_CODENAME="bullseye"
 
+#AWS Env Vars
+ARG AWS_ARCH="x86_64"
+ENV AWS_ARCH=$AWS_ARCH
+
+#WK Env Vars
+ARG WK_ARCH="arm64"
+ENV WK_ARCH=$WK_ARCH
+
+
 # Install software requirements
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
@@ -77,11 +86,11 @@ RUN a2enmod \
     && update-alternatives --set php /usr/bin/php${PHP_VERSION}
 
 # Extra Software
-RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" && \
+RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-${AWS_ARCH}.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
     rm -R awscliv2.zip ./aws && \
-    wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb" && \
+    wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_${WK_ARCH}.deb" && \
     dpkg -i wkhtmltopdf.deb && \
     rm wkhtmltopdf.deb
 
