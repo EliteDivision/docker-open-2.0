@@ -32,13 +32,13 @@ jobs:
       if: ${{ matrix.varian == 'base'}}
       env:
         DOCKER_TAG: ${{ matrix.php }}
-      run: "Echo Switch tag to ${{ env.DOCKER_TAG }}"
+      run: "echo Switch tag to ${{ env.DOCKER_TAG }}"
 
     - name: Variant Docker Tag
       if: ${{ matrix.varian != 'base'}}
       env:
         DOCKER_TAG: ${{ matrix.php }}-${{ matrix.variant }}
-      run: "Echo Switch tag to ${{ env.DOCKER_TAG }}"
+      run: "echo Switch tag to ${{ env.DOCKER_TAG }}"
 
     - name: Login to Hub
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
