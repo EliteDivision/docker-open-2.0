@@ -20,13 +20,13 @@ jobs:
         variant: ['base', 'with-shibboleth', 'dev']
         include:
           - variant: 'base'
-            tag: '${{ php }}'
+            tag: '${{ github.event.inputs.php }}'
           - variant: 'with-shibboleth'
             dockerdir: 'variants/with-shibboleth/'
-            tag: '${{ php }}-${{ variant }}'
+            tag: '${{ github.event.inputs.php }}-${{ github.event.inputs.variant }}'
           - variant: 'dev'
             dockerdir: 'variants/dev/'
-            tag: '${{ php }}-${{ variant }}'
+            tag: '${{ github.event.inputs.php }}-${{ github.event.inputs.variant }}'
     env:
       dockerfile: 'Dockerfile'
     steps:
