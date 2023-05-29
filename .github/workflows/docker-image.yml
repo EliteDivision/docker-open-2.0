@@ -19,18 +19,25 @@ jobs:
         php: ['7.0','7.4','8.2']
         variant: ['base', 'with-shibboleth', 'dev']
         include:
-          - variant: 'base'
-            tag: '${{ github.event.inputs.php }}'
           - variant: 'with-shibboleth'
             dockerdir: 'variants/with-shibboleth/'
-            tag: '${{ github.event.inputs.php }}-${{ github.event.inputs.variant }}'
           - variant: 'dev'
             dockerdir: 'variants/dev/'
-            tag: '${{ github.event.inputs.php }}-${{ github.event.inputs.variant }}'
     env:
       dockerfile: 'Dockerfile'
     steps:
     - uses: actions/checkout@v3
+
+    - name: Base Docker Tag
+      if: ${{ matrix.varian == 'base'}}
+      env:
+        DOCKER_TAG: ${{ matrix.php }}
+
+    - name: Variant Docker Tag
+      if: ${{ matrix.varian != 'base'}}
+      env:
+        DOCKER_TAG: ${{ matrix.php }}-${{ matrix.variant }}
+
     - name: Login to Hub
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
@@ -39,6 +46,7 @@ jobs:
         docker build ./${{ matrix.dockerdir }} 
         --build-arg "PHP_VERSION=${{ matrix.php }}" 
         --file ${{ matrix.dockerdir }}${{ env.dockerfile }} 
-        --tag $DOCKER_USER/$REPO_NAME:${{ matrix.tag }}
+        --tag $DOCKER_USER/$REPO_NAME:${{ env.DOCKER_TAG }}
+
     - name: Push ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
-      run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.tag }}
+      run: docker push $DOCKER_USER/$REPO_NAME:${{ env.DOCKER_TAG }}
