@@ -28,17 +28,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Base Docker Tag
+    - name: Set Docker Tag
       if: ${{ matrix.varian == 'base'}}
-      env:
-        DOCKER_TAG: ${{ matrix.php }}
-      run: "echo Switch tag to ${{ env.DOCKER_TAG }}"
-
-    - name: Variant Docker Tag
-      if: ${{ matrix.varian != 'base'}}
-      env:
-        DOCKER_TAG: ${{ matrix.php }}-${{ matrix.variant }}
-      run: "echo Switch tag to ${{ env.DOCKER_TAG }}"
+      run: DOCKER_TAG=$([ "${{ matrix.variant }}" == "base" ] &&  echo "${{matrix.php }}" || echo "${{ matrix.php }}-${{ matrix.variant }}")
 
     - name: Login to Hub
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
