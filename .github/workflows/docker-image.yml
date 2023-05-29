@@ -29,7 +29,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Set Docker Tag
-      run: DOCKER_TAG=$([ "${{ matrix.variant }}" == "base" ] &&  echo "${{matrix.php }}" || echo "${{ matrix.php }}-${{ matrix.variant }}")
+      run: echo $([ "${{ matrix.variant }}" == "base" ] &&  echo "${{matrix.php }}" || echo "${{ matrix.php }}-${{ matrix.variant }}") >> $GITHUB_ENV
 
     - name: Login to Hub
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
