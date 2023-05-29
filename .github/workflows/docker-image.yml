@@ -17,12 +17,16 @@ jobs:
       max-parallel: 1
       matrix:
         php: ['7.0','7.4','8.2']
-        variant: ['latest','with-shibboleth', 'dev']
+        variant: ['base', 'with-shibboleth', 'dev']
         include:
+          - variant: 'base'
+            tag: '${{ matrix.php }}'
           - variant: 'with-shibboleth'
             dockerdir: 'variants/with-shibboleth/'
+            tag: '${{ matrix.php }}-${{ matrix.variant }}'
           - variant: 'dev'
             dockerdir: 'variants/dev/'
+            tag: '${{ matrix.php }}-${{ matrix.variant }}'
     env:
       dockerfile: 'Dockerfile'
     steps:
@@ -35,6 +39,6 @@ jobs:
         docker build ./${{ matrix.dockerdir }} 
         --build-arg "PHP_VERSION=${{ matrix.php }}" 
         --file ${{ matrix.dockerdir }}${{ env.dockerfile }} 
-        --tag $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}
+        --tag $DOCKER_USER/$REPO_NAME:${{ matrix.tag }}
     - name: Push ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
-      run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.variant }}-${{ matrix.php }}
+      run: docker push $DOCKER_USER/$REPO_NAME:${{ matrix.tag }}
