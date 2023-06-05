@@ -30,6 +30,7 @@ RUN apt-get update \
     cron \
     fontconfig \
     #git \
+    libapache2-mod-security2 \
     libapache2-mod-php${PHP_VERSION} \
     libfontenc1 \
     libxrender1 \
