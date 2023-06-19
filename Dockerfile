@@ -52,6 +52,7 @@ RUN apt-get update \
     php${PHP_VERSION}-zip \
     php${PHP_VERSION}-curl \
     php${PHP_VERSION}-intl \
+    php${PHP_VERSION}-ldap \
     #procps \
     supervisor \
     unzip \
