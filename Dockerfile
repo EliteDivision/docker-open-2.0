@@ -6,6 +6,7 @@ ENV TZ Europe/Rome
 # ENV Vars, must be all set by user on start
 ENV DOMAIN_FRONTEND="frontend"
 ENV DOMAIN_BACKEND="backend"
+ENV ENC_KEY="changeme"
 
 #PHP VERSIONING
 ARG PHP_VERSION="7.0"
