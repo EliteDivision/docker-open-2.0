@@ -59,6 +59,27 @@ docker build -t my-open2-app .
 docker run -it --rm --name my-running-app my-open2-app
 ```
 
+# Environment Vars
+
+You can customize the application runtime using the following ENV Vars
+
+### DOMAIN_FRONTEND,DOMAIN_BACKEND
+If you need to run multidomain Application you can configure those two vars
+
+### ENC_KEY
+With this var you can change the data encryption inside the application
+
+### ENABLE_CRON
+Set "true" to enable the CRONTAB inside the App container (Default: true)
+
+### ENABLE_APACHE
+Set "true" to enable Webserver on the application container (Default: true)
+
+### ENABLE_PHP
+Set "true" to enable PHP FPM inside the application container (Default: true)
+
+
+
 # Image Variants
 
 The `open-2.0` images can be released in more than one iteration, based on many use cases and requirements
