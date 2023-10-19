@@ -1,4 +1,6 @@
-FROM debian:bullseye-slim
+ARG VERSION_CODENAME=bookworm
+FROM debian:${VERSION_CODENAME}-slim
+ARG VERSION_CODENAME
 
 # Timezone
 ENV TZ Europe/Rome
@@ -11,7 +13,7 @@ ENV ENC_KEY="changeme"
 #PHP VERSIONING
 ARG PHP_VERSION="7.0"
 ENV PHP_VERSION=$PHP_VERSION
-ENV VERSION_CODENAME="bullseye"
+ENV OS_NAME=$VERSION_CODENAME
 
 # Install software requirements
 RUN apt-get update \
@@ -24,7 +26,7 @@ RUN apt-get update \
     && apt-get clean \
     && apt-get autoclean \
     && wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.gpg" \
-    && echo "deb https://packages.sury.org/php/ ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/php.list \
+    && echo "deb https://packages.sury.org/php/ ${OS_NAME} main" > /etc/apt/sources.list.d/php.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
     apache2 \
@@ -83,8 +85,9 @@ RUN a2enmod \
 RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
-    rm -R awscliv2.zip ./aws && \
-    wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb" && \
+    rm -R awscliv2.zip ./aws \
+
+RUN wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-3.${OS_NAME}_amd64.deb" && \
     dpkg -i wkhtmltopdf.deb && \
     rm wkhtmltopdf.deb
 
