@@ -87,7 +87,7 @@ RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-x86_64
     ./aws/install && \
     rm -R awscliv2.zip ./aws
 
-RUN wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-3.${OS_NAME}_amd64.deb" && \
+RUN wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.${OS_NAME}_amd64.deb" && \
     dpkg -i wkhtmltopdf.deb && \
     rm wkhtmltopdf.deb
 
