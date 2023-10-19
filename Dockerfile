@@ -1,6 +1,9 @@
 ARG VERSION_CODENAME=bookworm
 FROM debian:${VERSION_CODENAME}-slim
+
+# Build Args
 ARG VERSION_CODENAME
+ARG PHP_VERSION="7.0"
 
 # Timezone
 ENV TZ Europe/Rome
@@ -10,8 +13,12 @@ ENV DOMAIN_FRONTEND="frontend"
 ENV DOMAIN_BACKEND="backend"
 ENV ENC_KEY="changeme"
 
-#PHP VERSIONING
-ARG PHP_VERSION="7.0"
+# ENV Vars to Enable/Disable Services
+ENV ENABLE_CRON="true"
+ENV ENABLE_APACHE="true"
+ENV ENABLE_PHP="true"
+
+#System ENV Vars
 ENV PHP_VERSION=$PHP_VERSION
 ENV OS_NAME=$VERSION_CODENAME
 
@@ -82,12 +89,12 @@ RUN a2enmod \
     && update-alternatives --set php /usr/bin/php${PHP_VERSION}
 
 # Extra Software
-RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" && \
+RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
     rm -R awscliv2.zip ./aws
 
-RUN wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.${OS_NAME}_amd64.deb" && \
+RUN wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.${OS_NAME}_$(uname -m).deb" && \
     dpkg -i wkhtmltopdf.deb && \
     rm wkhtmltopdf.deb
 
@@ -115,13 +122,8 @@ COPY docker/supervisor/ /etc/supervisor/conf.d/
 RUN chmod +x /entrypoint.sh && \
     mkdir -p /run/php
 
-# Optional ENV Vars
-ENV ENABLE_CRON="true"
-ENV ENABLE_APACHE="true"
-ENV ENABLE_PHP="true"
-
 # Ports
-EXPOSE 443
+EXPOSE 80 443
 
 # Set entrypoint and default command.
 CMD "/entrypoint.sh"
