@@ -15,6 +15,6 @@ else
     apache2ctl configtest
 
     # Force  stop services
-    systemctl disable apache2.service
-    service apache2 stop
+    systemctl disable apache2.service | true
+    service apache2 stop | true
 fi
