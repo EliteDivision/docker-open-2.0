@@ -23,24 +23,8 @@ services:
       - "3306"
     networks:
       open2net:
-  dbadmin:
-    image: phpmyadmin:fpm-alpine
-    restart: always
-    environment:
-      PMA_HOST: "database"
-      PMA_USER: "root"
-      PMA_PASSWORD: "${DATABASE_ROOT_PASSWORD}"
-      UPLOAD_LIMIT: "2G"
-    volumes:
-      - applog:/var/log
-    ports:
-      - "127.0.0.1:8081:80"
-    depends_on:
-      - database
-    networks:
-      open2net:
   elasticsearch:
-    image: elasticsearch:6.8.23
+    image: elasticsearch:8.10.2
     restart: always
     volumes:
       - applog:/var/log

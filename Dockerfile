@@ -1,9 +1,15 @@
-ARG VERSION_CODENAME=bookworm
-FROM debian:${VERSION_CODENAME}-slim
+# OS Selection
+ARG OS_CODENAME="bookworm"
+
+FROM debian:${OS_CODENAME}-slim
 
 # Build Args
-ARG VERSION_CODENAME
+ARG OS_CODENAME
 ARG PHP_VERSION="7.0"
+
+#System ENV Vars
+ENV OS_CODENAME=$OS_CODENAME
+ENV PHP_VERSION=$PHP_VERSION
 
 # Timezone
 ENV TZ Europe/Rome
@@ -18,10 +24,6 @@ ENV ENABLE_CRON="true"
 ENV ENABLE_APACHE="true"
 ENV ENABLE_PHP="true"
 
-#System ENV Vars
-ENV PHP_VERSION=$PHP_VERSION
-ENV OS_NAME=$VERSION_CODENAME
-
 # Install software requirements
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
@@ -33,7 +35,7 @@ RUN apt-get update \
     && apt-get clean \
     && apt-get autoclean \
     && wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.gpg" \
-    && echo "deb https://packages.sury.org/php/ ${OS_NAME} main" > /etc/apt/sources.list.d/php.list \
+    && echo "deb https://packages.sury.org/php/ ${OS_CODENAME} main" > /etc/apt/sources.list.d/php.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
     apache2 \
@@ -94,9 +96,10 @@ RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-$(unam
     ./aws/install && \
     rm -R awscliv2.zip ./aws
 
-RUN wget -O "wkhtmltopdf.deb" "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.${OS_NAME}_$(uname -m).deb" && \
-    dpkg -i wkhtmltopdf.deb && \
-    rm wkhtmltopdf.deb
+#RUN wget -O "wkhtmltopdf.deb" \
+#    "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.${OS_CODENAME}_amd64.deb" && \
+#    dpkg -i wkhtmltopdf.deb && \
+#    rm wkhtmltopdf.deb
 
 # Application base source code
 COPY --chown=www-data:www-data app /var/www/app
