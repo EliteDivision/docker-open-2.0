@@ -46,10 +46,12 @@ RUN apt-get update \
     libapache2-mod-php${PHP_VERSION} \
     libfontenc1 \
     libxrender1 \
+    lmodern \
     logrotate \
     mariadb-client \
     #nginx \
     ntp \
+    pandoc \
     php${PHP_VERSION} \
     php${PHP_VERSION}-fpm \
     php${PHP_VERSION}-mcrypt \
@@ -65,8 +67,11 @@ RUN apt-get update \
     php${PHP_VERSION}-curl \
     php${PHP_VERSION}-intl \
     php${PHP_VERSION}-ldap \
+    python3-pip \
     #procps \
     supervisor \
+    texlive-latex-base \
+    texlive-latex-recommended \
     unzip \
     xfonts-75dpi \
     xfonts-base \
@@ -77,29 +82,21 @@ RUN apt-get update \
 
 # Apache Section
 RUN a2enmod \
-    ssl \
-    php${PHP_VERSION} \
-    headers \
     alias \
+    headers \
     include \
     negotiation \
+    php${PHP_VERSION} \
     proxy \
     proxy_http \
     rewrite \
     session \
+    ssl \
     vhost_alias \
     && update-alternatives --set php /usr/bin/php${PHP_VERSION}
 
 # Extra Software
-RUN wget -O "awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install && \
-    rm -R awscliv2.zip ./aws
-
-#RUN wget -O "wkhtmltopdf.deb" \
-#    "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.${OS_CODENAME}_amd64.deb" && \
-#    dpkg -i wkhtmltopdf.deb && \
-#    rm wkhtmltopdf.deb
+RUN pip install awscli --upgrade --break-system-packages
 
 # Application base source code
 COPY --chown=www-data:www-data app /var/www/app
