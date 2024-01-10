@@ -1,4 +1,4 @@
 #m      h       dom	    mon	    dow	    user        command
 0       0       *       *       *       root        cd /var/www/app;flock --verbose -w 0 common/uploads/logrotate.lock -c "/usr/sbin/logrotate -f /etc/logrotate.conf > common/uploads/logrotate.log 2>&1"
 0       1	    *	    *	    *	    root        cd /var/www/app;flock --verbose -w 0 common/uploads/clean_temp.lock -c "find common/uploads/temp -mindepth 1 -mmin +59 -type d -delete >> common/uploads/cleanup.log 2>&1"
-0       0       *       *       5       root        cd /var/www/app;flock --verbose -w 0 common/uploads/clean_audits.lock -c "php yii audit/cleanup --age=30 --interactive 0 >> common/uploads/cleanup.log 2>&1"
+0       0       *       *       5       root        cd /var/www/app;flock --verbose -w 0 common/uploads/clean_audits.lock -c "php yii audit/cleanup --age=90 --interactive 0 >> common/uploads/cleanup.log 2>&1"
