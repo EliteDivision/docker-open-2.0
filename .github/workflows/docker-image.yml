@@ -43,3 +43,9 @@ jobs:
 
     - name: Push ${{ matrix.variant }} with PHP ${{ matrix.php }} Image
       run: docker push $DOCKER_USER/$REPO_NAME:${{ env.DOCKER_TAG }}
+
+    - name: Tag ${{ matrix.variant }} with PHP ${{ matrix.php }} as Latest
+      run: docker tag $DOCKER_USER/$REPO_NAME:${{ env.DOCKER_TAG }} $DOCKER_USER/$REPO_NAME:latest
+
+    - name: Push Latest
+      run: docker push $DOCKER_USER/$REPO_NAME:latest
