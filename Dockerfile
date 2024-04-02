@@ -43,7 +43,7 @@ RUN apt-get update \
     fontconfig \
     #git \
     libapache2-mod-security2 \
-    libapache2-mod-php${PHP_VERSION} \
+    #libapache2-mod-php${PHP_VERSION} \
     libfontenc1 \
     libxrender1 \
     lmodern \
@@ -94,6 +94,11 @@ RUN a2enmod \
     ssl \
     vhost_alias \
     && update-alternatives --set php /usr/bin/php${PHP_VERSION}
+
+# Switch Apache to PHP-FPM
+RUN a2dismod mpm_prefork
+RUN a2enmod mpm_event
+RUN a2enmod php${PHP_VERSION}-fpm
 
 # Extra Software
 RUN pip install awscli --upgrade --break-system-packages
