@@ -96,8 +96,6 @@ RUN a2enmod \
     vhost_alias \
     && update-alternatives --set php /usr/bin/php${PHP_VERSION}
 
-RUN a2enconf php${PHP_VERSION}-fpm
-
 # Extra Software
 RUN pip install awscli --upgrade --break-system-packages
 
