@@ -85,8 +85,9 @@ RUN a2enmod \
     alias \
     headers \
     include \
+    mpm_event \
     negotiation \
-    php${PHP_VERSION} \
+    php${PHP_VERSION}-fpm \
     proxy \
     proxy_http \
     rewrite \
@@ -94,11 +95,6 @@ RUN a2enmod \
     ssl \
     vhost_alias \
     && update-alternatives --set php /usr/bin/php${PHP_VERSION}
-
-# Switch Apache to PHP-FPM
-RUN a2dismod mpm_prefork
-RUN a2enmod mpm_event
-RUN a2enmod php${PHP_VERSION}-fpm
 
 # Extra Software
 RUN pip install awscli --upgrade --break-system-packages
