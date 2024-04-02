@@ -88,6 +88,7 @@ RUN a2enmod \
     mpm_event \
     negotiation \
     proxy \
+    proxy_fcgi \
     proxy_http \
     rewrite \
     session \
