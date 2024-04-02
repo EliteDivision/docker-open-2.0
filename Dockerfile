@@ -87,7 +87,6 @@ RUN a2enmod \
     include \
     mpm_event \
     negotiation \
-    php${PHP_VERSION}-fpm \
     proxy \
     proxy_http \
     rewrite \
