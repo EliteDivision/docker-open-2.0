@@ -26,7 +26,7 @@ jobs:
     env:
       dockerfile: 'Dockerfile'
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set Docker Tag
       run: echo $([ "${{ matrix.variant }}" == "base" ] &&  echo "DOCKER_TAG=${{matrix.php }}" || echo "DOCKER_TAG=${{ matrix.php }}-${{ matrix.variant }}") >> $GITHUB_ENV
