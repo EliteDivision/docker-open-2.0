@@ -7,7 +7,7 @@ set -e
 cd /var/www/app/
 
 # Fix custom scripts
-dos2unix /service/*.sh | true
+dos2unix /service/*.sh
 
 # Impor custom phases
 for f in /service/*.sh; do source $f; done
