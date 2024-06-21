@@ -11,7 +11,6 @@ ENV PHP_VERSION="7.0"
 # Install software requirements
 RUN apk add --no-cache \
     php7-fpm \
-    php7-mcrypt \
     php7-soap \
     php7-json \
     php7-dom \
