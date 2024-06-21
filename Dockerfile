@@ -40,6 +40,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
     apache2 \
     cron \
+    dos2unix \
     fontconfig \
     #git \
     libapache2-mod-security2 \
@@ -53,20 +54,20 @@ RUN apt-get update \
     ntp \
     pandoc \
     php${PHP_VERSION} \
-    php${PHP_VERSION}-fpm \
-    php${PHP_VERSION}-mcrypt \
-    php${PHP_VERSION}-bcmath \
-    php${PHP_VERSION}-soap \
-    php${PHP_VERSION}-mysql \
-    php${PHP_VERSION}-mbstring \
     php${PHP_VERSION}-apcu \
+    php${PHP_VERSION}-bcmath \
+    php${PHP_VERSION}-curl \
+    php${PHP_VERSION}-fpm \
     php${PHP_VERSION}-gd \
     php${PHP_VERSION}-imagick \
-    php${PHP_VERSION}-xml \
-    php${PHP_VERSION}-zip \
-    php${PHP_VERSION}-curl \
     php${PHP_VERSION}-intl \
     php${PHP_VERSION}-ldap \
+    php${PHP_VERSION}-mbstring \
+    php${PHP_VERSION}-mcrypt \
+    php${PHP_VERSION}-mysql \
+    php${PHP_VERSION}-soap \
+    php${PHP_VERSION}-xml \
+    php${PHP_VERSION}-zip \
     python3-pip \
     #procps \
     supervisor \
