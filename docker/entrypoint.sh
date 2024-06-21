@@ -6,6 +6,9 @@ set -e
 # Move to Application directory
 cd /var/www/app/
 
+# Fix custom scripts
+dos2unix /service/*.sh | true
+
 # Impor custom phases
 for f in /service/*.sh; do source $f; done
 
