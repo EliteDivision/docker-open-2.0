@@ -83,6 +83,7 @@ RUN apt-get update \
 # Apache Section
 RUN a2enmod \
     alias \
+    deflate \
     headers \
     include \
     mpm_event \
