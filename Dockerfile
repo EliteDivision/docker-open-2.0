@@ -24,6 +24,12 @@ ENV ENABLE_CRON="true"
 ENV ENABLE_APACHE="true"
 ENV ENABLE_PHP="true"
 
+# Elastic Search
+ENV ES_USER="_ESUSER"
+ENV ES_PASS="_ESPASS"
+ENV ES_HOST="_ESHOST"
+ENV ES_PORT="_ESPORT"
+
 # Install software requirements
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
