@@ -30,6 +30,18 @@ ENV ES_PASS="_ESPASS"
 ENV ES_HOST="_ESHOST"
 ENV ES_PORT="_ESPORT"
 
+# S3
+ENV S3_BUCKET="_S3BUCKET"
+ENV S3_SECRET_KEY="_S3SECRET"
+ENV S3_ACCESS_KEY="_S3ACCESS"
+
+# Distribution
+ENV CDN_BASE_URL="_CDN_BASE_URL"
+
+# Redis
+ENV REDIS_HOST="_REDIS_HOST"
+ENV REDIS_PORT="_REDIS_PORT"
+
 # Install software requirements
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
