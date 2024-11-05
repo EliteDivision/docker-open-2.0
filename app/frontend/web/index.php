@@ -1,1 +1,1 @@
-<?= "Works Like a Charm" ?>
+<?= phpinfo();
