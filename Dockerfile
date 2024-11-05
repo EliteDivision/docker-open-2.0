@@ -64,6 +64,7 @@ RUN apt-get update \
     libapache2-mod-security2 \
     #libapache2-mod-php${PHP_VERSION} \
     libfontenc1 \
+    libwebp-dev \
     libxrender1 \
     lmodern \
     logrotate \
@@ -77,7 +78,7 @@ RUN apt-get update \
     php${PHP_VERSION}-curl \
     php${PHP_VERSION}-fpm \
     php${PHP_VERSION}-gd \
-    php${PHP_VERSION}-imagick \
+    #php${PHP_VERSION}-imagick \
     php${PHP_VERSION}-intl \
     php${PHP_VERSION}-ldap \
     php${PHP_VERSION}-mbstring \
@@ -97,6 +98,22 @@ RUN apt-get update \
     xfonts-encodings \
     && apt-get clean \
     && apt-get autoclean
+
+# Imagick Updated with WebP Support
+RUN wget -O imagick.tar.gz wget https://imagemagick.org/download/ImageMagick.tar.gz && \
+    tar -xzvf imagick.tar.gz && \
+    cd imagick && \
+    ./configure \
+      --with-jpeg=yes \
+      --with-png=yes \
+      --with-webp=yes \
+      --with-tiff=yes \
+      --with-zlib=yes \
+    make && make install && \
+    pecl -d php_suffix=${PHP_VERSION} install imagick && \
+    echo "extension=imagick.so" > /etc/php/8.2/mods-available/imagick.ini && \
+    phpenmod imagick && \
+
 
 # Apache Section
 RUN a2enmod \
