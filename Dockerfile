@@ -134,7 +134,7 @@ COPY docker/logrotate/ /etc/logrotate.d/
 COPY docker/php/php.ini /etc/php/${PHP_VERSION}/fpm/conf.d/30-customs.ini
 COPY docker/php/cli.ini /etc/php/${PHP_VERSION}/cli/conf.d/30-customs.ini
 COPY docker/php/php.ini /etc/php/${PHP_VERSION}/apache2/conf.d/30-customs.ini
-COPY docker/php/php.pool /etc/php/${PHP_VERSION}/fpm/pool.d/zz_custom.conf
+COPY docker/php/php.pool /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
 COPY docker/supervisor/ /etc/supervisor/conf.d/
 
