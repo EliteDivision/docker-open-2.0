@@ -5,7 +5,7 @@ FROM debian:${OS_CODENAME}-slim
 
 # Build Args
 ARG OS_CODENAME
-ARG PHP_VERSION="7.0"
+ARG PHP_VERSION="8.4"
 
 #System ENV Vars
 ENV OS_CODENAME=$OS_CODENAME
@@ -78,7 +78,7 @@ RUN apt-get update \
     php${PHP_VERSION}-curl \
     php${PHP_VERSION}-fpm \
     php${PHP_VERSION}-gd \
-    #php${PHP_VERSION}-imagick \
+    php${PHP_VERSION}-imagick \
     php${PHP_VERSION}-intl \
     php${PHP_VERSION}-ldap \
     php${PHP_VERSION}-mbstring \
@@ -98,22 +98,6 @@ RUN apt-get update \
     xfonts-encodings \
     && apt-get clean \
     && apt-get autoclean
-
-# Imagick Updated with WebP Support
-RUN wget -O imagick.tar.gz wget https://imagemagick.org/download/ImageMagick.tar.gz && \
-    tar -xzvf imagick.tar.gz && \
-    cd imagick && \
-    ./configure \
-      --with-jpeg=yes \
-      --with-png=yes \
-      --with-webp=yes \
-      --with-tiff=yes \
-      --with-zlib=yes \
-    make && make install && \
-    pecl -d php_suffix=${PHP_VERSION} install imagick && \
-    echo "extension=imagick.so" > /etc/php/8.2/mods-available/imagick.ini && \
-    phpenmod imagick && \
-
 
 # Apache Section
 RUN a2enmod \
