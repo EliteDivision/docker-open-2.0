@@ -1,2 +1,2 @@
-echo "Current Environment...\n"
+#echo "Current Environment..."
 #env
