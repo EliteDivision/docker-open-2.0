@@ -2,8 +2,8 @@ if [ "$ENABLE_APACHE" = "false" ] ; then
     rm /etc/supervisor/conf.d/apache.conf
 else
     #Override Apache Vhost Domains
-    sed -i "s/FRONTEND/${DOMAIN_FRONTEND}/" /etc/apache2/sites-available/000-default.conf
-    sed -i "s/BACKEND/${DOMAIN_BACKEND}/" /etc/apache2/sites-available/000-default.conf
+    sed -i "s/DOMAIN_FRONTEND/${DOMAIN_FRONTEND}/" /etc/apache2/sites-available/000-default.conf
+    sed -i "s/DOMAIN_BACKEND/${DOMAIN_BACKEND}/" /etc/apache2/sites-available/000-default.conf
 
     # Generate Self-Signed Certificate
     openssl genrsa -out /etc/ssl/private/httpd.key 3072 > /dev/null 2>&1
