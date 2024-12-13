@@ -43,34 +43,32 @@ ENV REDIS_HOST="_REDIS_HOST"
 ENV REDIS_PORT="_REDIS_PORT"
 
 # Install software requirements
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends --no-install-suggests \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends --no-install-suggests \
     apt-transport-https \
     ca-certificates \
-    #curl \
     gnupg2 \
-    wget \
-    && apt-get clean \
-    && apt-get autoclean \
-    && wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.gpg" \
+    wget
+
+# PHP Repos
+RUN wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.gpg" \
     && echo "deb https://packages.sury.org/php/ ${OS_CODENAME} main" > /etc/apt/sources.list.d/php.list \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends --no-install-suggests \
+    && apt-get update
+
+RUN apt-get install -y --no-install-recommends --no-install-suggests \
     apache2 \
     cron \
     dos2unix \
-    fontconfig \
-    #git \
     libapache2-mod-security2 \
     #libapache2-mod-php${PHP_VERSION} \
-    libfontenc1 \
-    libxrender1 \
-    lmodern \
     logrotate \
-    mariadb-client \
-    #nginx \
     ntp \
-    pandoc \
+    python3-pip \
+    python3-venv \
+    supervisor
+
+# PHP Required Packages
+RUN apt-get install -y --no-install-recommends --no-install-suggests \
     php${PHP_VERSION} \
     php${PHP_VERSION}-apcu \
     php${PHP_VERSION}-bcmath \
@@ -84,19 +82,7 @@ RUN apt-get update \
     php${PHP_VERSION}-mysql \
     php${PHP_VERSION}-soap \
     php${PHP_VERSION}-xml \
-    php${PHP_VERSION}-zip \
-    python3-pip \
-    #procps \
-    supervisor \
-    texlive-latex-base \
-    texlive-latex-recommended \
-    unzip \
-    xfonts-75dpi \
-    xfonts-base \
-    xfonts-utils \
-    xfonts-encodings \
-    && apt-get clean \
-    && apt-get autoclean
+    php${PHP_VERSION}-zip
 
 # Apache Section
 RUN a2enmod \
@@ -116,7 +102,10 @@ RUN a2enmod \
     && update-alternatives --set php /usr/bin/php${PHP_VERSION}
 
 # Extra Software
-RUN pip install awscli --upgrade --break-system-packages
+RUN python3 -m venv /usr/awscli && \
+    . /usr/awscli/bin/activate && \
+    /usr/awscli/bin/pip install awscli --upgrade && \
+    ln -s /usr/awscli/bin/aws /usr/bin
 
 # Application base source code
 COPY --chown=www-data:www-data app /var/www/app

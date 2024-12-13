@@ -3,7 +3,10 @@ FROM elitedivision/open-2.0:${PHP_VERSION}
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
-    git
+    git \
+    mariadb-client \
+    unzip \
+    vim
 
 # Install composer for development
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
