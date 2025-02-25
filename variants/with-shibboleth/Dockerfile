@@ -3,7 +3,9 @@ FROM elitedivision/open-2.0:${PHP_VERSION}
 
 # ShibbolethSP
 ENV SP_FRONTEND_ID="frontend"
+ENV SP_FRONTEND_IDM_ID="frontend_idm"
 ENV SP_BACKEND_ID="backend"
+ENV SP_BACKEND_IDM_ID="backend_idm"
 
 # Install software requirements
 RUN apt-get update \

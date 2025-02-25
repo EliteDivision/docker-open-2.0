@@ -3,7 +3,10 @@ if [ "$ENABLE_SHIBD" = "false" ] ; then
 else
     # Setup AppID
     sed -i "s/SP_FRONTEND_ID/${SP_FRONTEND_ID}/" /etc/apache2/sites-available/000-default.conf
+    sed -i "s/SP_FRONTEND_IDM_ID/${SP_FRONTEND_IDM_ID}/" /etc/apache2/sites-available/000-default.conf
+
     sed -i "s/SP_BACKEND_ID/${SP_BACKEND_ID}/" /etc/apache2/sites-available/000-default.conf
+    sed -i "s/SP_BACKEND_IDM_ID/${SP_BACKEND_IDM_ID}/" /etc/apache2/sites-available/000-default.conf
 
     #Reset Service (thanks debian...)
     service shibd restart
