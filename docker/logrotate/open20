@@ -1,4 +1,5 @@
 /var/www/app/common/uploads/*.log {
+    su www-data www-data
 	daily
 	missingok
 	rotate 14
