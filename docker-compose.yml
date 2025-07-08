@@ -13,7 +13,7 @@ services:
       open2net:
 
   database:
-    image: mariadb
+    image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password --sql-mode="STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
     restart: always
     environment:
