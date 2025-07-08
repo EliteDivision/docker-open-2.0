@@ -2,7 +2,7 @@ version: "3.9"
 services:
   web:
     build: .
-    image: elitedivision/open-2.0
+    image: elitedivision/open-2.0:8.4-dev
     ports:
       - "127.0.0.1:8443:443"
     volumes:
