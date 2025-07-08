@@ -25,6 +25,8 @@ services:
       - dbdata:/var/lib/mysql
       - applog:/var/log
     expose:
+      - "3306"
+    ports:
       - "127.0.0.1:3306:3306"
     networks:
       open2net:
