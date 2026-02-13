@@ -62,7 +62,6 @@ RUN apt-get install -y --no-install-recommends --no-install-suggests \
     libapache2-mod-security2 \
     #libapache2-mod-php${PHP_VERSION} \
     logrotate \
-    ntp \
     python3-pip \
     python3-venv \
     supervisor
