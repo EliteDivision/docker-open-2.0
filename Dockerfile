@@ -1,5 +1,5 @@
 # OS Selection
-ARG OS_CODENAME="bookworm"
+ARG OS_CODENAME="trixie"
 
 FROM debian:${OS_CODENAME}-slim
 
