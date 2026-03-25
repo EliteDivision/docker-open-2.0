@@ -10,9 +10,9 @@ group = www-data
 
 ; Proccess Manager
 pm = ondemand
-pm.max_children = 250
+pm.max_children = PHP_MAX_CHILDREN
 ; pm.start_servers = 16
 ; pm.min_spare_servers = 8
 ; pm.max_spare_servers = 32
-pm.max_requests = 10000
+pm.max_requests = 1000
 pm.process_idle_timeout = 10s
