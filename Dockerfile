@@ -61,6 +61,7 @@ RUN wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.
 RUN apt-get install -y --no-install-recommends --no-install-suggests \
     apache2 \
     cron \
+    curl \
     dos2unix \
     libapache2-mod-security2 \
     #libapache2-mod-php${PHP_VERSION} \
@@ -131,6 +132,7 @@ COPY docker/supervisor/ /etc/supervisor/conf.d/
 
 # Post Processes
 RUN chmod +x /entrypoint.sh && \
+    chmod +x /etc/supervisor/conf.d/healthcheck.sh && \
     mkdir -p /run/php
 
 # Ports
