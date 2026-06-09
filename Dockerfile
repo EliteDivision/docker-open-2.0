@@ -93,7 +93,7 @@ RUN a2enmod \
     deflate \
     headers \
     include \
-    mpm_event \
+    #mpm_event \
     negotiation \
     proxy \
     proxy_fcgi \
