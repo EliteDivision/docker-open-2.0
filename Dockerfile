@@ -64,7 +64,7 @@ RUN apt-get install -y --no-install-recommends --no-install-suggests \
     curl \
     dos2unix \
     libapache2-mod-security2 \
-    #libapache2-mod-php${PHP_VERSION} \
+    libapache2-mod-php${PHP_VERSION} \
     logrotate \
     python3-pip \
     python3-venv \
