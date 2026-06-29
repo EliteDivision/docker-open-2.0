@@ -27,6 +27,9 @@ ENV ENABLE_CRON="true"
 ENV ENABLE_APACHE="true"
 ENV ENABLE_PHP="true"
 
+# Audit cleanup retention (age in days) used by the cron audit/cleanup job
+ENV AUDIT_CLEANUP_AGE="540"
+
 # Elastic Search
 ENV ES_USER="_ESUSER"
 ENV ES_PASS="_ESPASS"
