@@ -78,6 +78,12 @@ Set "true" to enable Webserver on the application container (Default: true)
 ### ENABLE_PHP
 Set "true" to enable PHP FPM inside the application container (Default: true)
 
+### PHP_UPLOAD_MAX_FILESIZE
+PHP `upload_max_filesize` value (Default: 64M)
+
+### PHP_POST_MAX_SIZE
+PHP `post_max_size` value, should be greater than `PHP_UPLOAD_MAX_FILESIZE` (Default: 68M)
+
 
 
 # Image Variants
